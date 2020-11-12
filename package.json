@@ -1,10 +1,25 @@
 {
+  "name": "koa2-learn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baixiaoyu2997/koa2-learn.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/baixiaoyu2997/koa2-learn/issues"
+  },
+  "homepage": "https://github.com/baixiaoyu2997/koa2-learn#readme",
   "dependencies": {
-    "ejs": "^2.7.4",
-    "koa": "^2.11.0",
-    "koa-bodyparser": "^4.2.1",
-    "koa-router": "^7.4.0",
-    "koa-static": "^5.0.0",
-    "koa-views": "^6.2.1"
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^10.0.0"
   }
 }
