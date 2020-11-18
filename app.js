@@ -1,43 +1,56 @@
-const Koa = require('koa')
-const app = new Koa()
-const router = require('koa-router')()
-const bodyParser = require('koa-bodyparser')
-const koaStatic = require('koa-static')
-const static = koaStatic(__dirname)
+const mongoose = require('mongoose')
 
-router.get('/', async ctx => {
-  ctx.body = `
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <form action="/signin" method="post">
-        <p><label>用户名：</label><input type="text" name="name" ></p>
-        <p><label>密码：</label><input type="password" name="password"></p>
-        <button type="submit">submit</button>
-      </form>
-</body>
-</html>
-  `
+mongoose.connect('mongodb://127.0.0.1:27017/eggcms', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 })
-router.post('/signin', async ctx => {
-  const { name, password } = ctx.request.body
-  if (name === 'admin' && password === '123456') {
-    ctx.body = 'Welcome Admin!'
-  } else {
-    ctx.body = `
-        <h1>Login failed</h1>
-        <p><a href="/">Try again</a></p>
-        `
-  }
+
+const UserSchema = mongoose.Schema({
+  name: String,
+  age: Number,
+  status: Number
 })
-app.use(bodyParser())
-app.use(router.routes())
-app.use(static)
-app.listen(3000)
-console.log('app started at port http://localhost:3000')
+
+const User = mongoose.model('user', UserSchema)
+
+// 查找数据
+// User.find({},(err,doc)=>{
+//   if(err){
+//     console.log(err)
+//     return
+//   }
+//   console.log(doc)
+// })
+
+// 新增数据
+// const u=new User({
+//   name:'李四7',
+//   age:'123',
+//   status:1
+// })
+// console.log(u)
+// u.save().then((data)=>{
+//   console.log('成功')
+//   console.log(data)
+// }).catch(err=>{
+//   console.log('失败')
+//   console.log(err)
+// })
+
+// 修改数据
+// User.updateOne({ _id: '5fb48fc35c3682c1cae0140c' }, { name: '李四6' })
+//   .then(data => {
+//     console.log(data)
+//   })
+//   .catch(err => {
+//     console.log(err)
+//   })
+
+// 删除数据
+// User.deleteOne({ _id: '5fb48fc35c3682c1cae0140c' })
+//   .then(result => {
+//     console.log(result)
+//   })
+//   .catch(err => {
+//     console.log(err)
+//   })
